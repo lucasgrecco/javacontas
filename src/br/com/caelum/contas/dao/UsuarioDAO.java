@@ -41,7 +41,7 @@ public class UsuarioDAO {
 			rs.close();
 			stmt.close();
 
-			connection.close();
+			//connection.close();
 			
 			return encontrado;
 		} catch (SQLException e) {
@@ -60,7 +60,7 @@ public class UsuarioDAO {
 			stmt.setString(2, usuario.getSenha());
 			stmt.execute();
 
-			connection.close();
+			//connection.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}		

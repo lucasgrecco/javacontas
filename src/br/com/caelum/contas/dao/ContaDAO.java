@@ -42,7 +42,7 @@ public class ContaDAO {
 			stmt.setDouble(3, conta.getValor());
 			stmt.setString(4, conta.getTipo().name());
 			stmt.execute();
-			connection.close();
+			//connection.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -62,7 +62,7 @@ public class ContaDAO {
 			stmt.setLong(1, conta.getId());
 			stmt.execute();
 
-			connection.close();
+			//connection.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -82,7 +82,7 @@ public class ContaDAO {
 			stmt.setLong(6, conta.getId());
 			stmt.execute();
 
-			connection.close();
+			//connection.close();
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -104,7 +104,7 @@ public class ContaDAO {
 
 			rs.close();
 			stmt.close();
-			connection.close();
+			//connection.close();
 
 			return contas;
 		} catch (SQLException e) {
@@ -125,14 +125,14 @@ public class ContaDAO {
 			ResultSet rs = stmt.executeQuery();
 
 			if (rs.next()) {
-				connection.close();
+				//connection.close();
 				return populaConta(rs);
 			}
 
 			rs.close();
 			stmt.close();
 
-			connection.close();
+			//connection.close();
 			return null;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -154,7 +154,7 @@ public class ContaDAO {
 			stmt.setLong(3, id);
 			stmt.execute();
 
-			connection.close();
+			//connection.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
