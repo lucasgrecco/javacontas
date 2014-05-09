@@ -2,14 +2,20 @@ package br.com.caelum.contas.modelo;
 
 import java.util.Calendar;
 
-import javax.validation.constraints.NotNull;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
 
 public class Conta {
 	
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	//@NotEmpty(message= "{conta.descricao.vazia}")    
     //@Size(min = 5, max = 500, message="{conta.descricao.size}")	
@@ -22,10 +28,13 @@ public class Conta {
 	
 	private double valor;
 	
-	@DateTimeFormat(pattern="dd/MM/yyyy")
+//	@DateTimeFormat(pattern="dd/MM/yyyy") //Spring com JDBC
+	@Temporal(TemporalType.DATE)
 	private Calendar dataPagamento;
 	
+	@Enumerated(EnumType.STRING)
 	private TipoDaConta tipo;
+	
 
 	public Long getId() {
 		return id;

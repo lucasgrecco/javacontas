@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,39 +16,24 @@ import br.com.caelum.contas.modelo.Usuario;
 
 @Repository
 public class UsuarioDAO {
-	private Connection connection;
-
-	@Autowired
-	public UsuarioDAO(DataSource ds) {
-		try {
-			this.connection = ds.getConnection();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
+	
+	@PersistenceContext
+	private EntityManager manager;
+	
+	@SuppressWarnings("unused")
 	public boolean existeUsuario(Usuario usuario) {
+		boolean encontrado = false;
+		Usuario bUsuario = manager.find(Usuario.class, usuario.getId());
 		
 		if(usuario == null) {
 			throw new IllegalArgumentException("Usuário nao deve ser nulo");
 		}
 		
-		try {
-			PreparedStatement stmt = this.connection.prepareStatement("select * from usuarios where login = ? and senha = ?");
-			stmt.setString(1, usuario.getLogin());
-			stmt.setString(2, usuario.getSenha());
-			ResultSet rs = stmt.executeQuery();
-
-			boolean encontrado = rs.next();
-			rs.close();
-			stmt.close();
-
-			//connection.close();
-			
-			return encontrado;
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
+		if(bUsuario != null){
+			encontrado =  true;
 		}
+		
+		return encontrado;
 	}
 
 	public void insere(Usuario usuario) {
@@ -54,16 +41,7 @@ public class UsuarioDAO {
 			throw new IllegalArgumentException("Usuário nao deve ser nulo");
 		}
 		
-		try {
-			PreparedStatement stmt = this.connection.prepareStatement("insert into usuarios (login,senha) values (?,?)");
-			stmt.setString(1, usuario.getLogin());
-			stmt.setString(2, usuario.getSenha());
-			stmt.execute();
-
-			//connection.close();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}		
+		manager.persist(usuario);
 	}
 }
 

@@ -3,6 +3,7 @@ package br.com.caelum.contas.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,17 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.caelum.contas.dao.ContaDAO;
 import br.com.caelum.contas.modelo.Conta;
 
+@Transactional
 @Controller
 public class ContaController {
-
+	
+	@Autowired
 	private ContaDAO contaDao;
 
-	@Autowired
-	public ContaController(ContaDAO contaDao) {
-		this.contaDao = contaDao;
-	}
+//	@Autowired //Spring vai fazer a inejção
+//	public ContaController(ContaDAO contaDao) {
+//		this.contaDao = contaDao;
+//	}
 
 	@RequestMapping("/formulario-adiciona-conta")
 	public String formulario() {
