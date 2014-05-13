@@ -1,12 +1,16 @@
 package br.com.caelum.contas.modelo;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-@Repository
+@Entity
+//@Repository
+@Component
 public class Usuario {
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)

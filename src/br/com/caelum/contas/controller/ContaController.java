@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.caelum.contas.dao.ContaDAO;
 import br.com.caelum.contas.modelo.Conta;
 
-@Transactional
+//@Transactional
 @Controller
 public class ContaController {
 	
@@ -32,7 +32,7 @@ public class ContaController {
 	public String formulario() {
 		return "conta/formulario";
 	}
-
+	
 	@RequestMapping("/adiciona-conta")
 	public String adicionaConta(@Valid Conta conta, BindingResult result) {
 
@@ -44,7 +44,7 @@ public class ContaController {
 		// de erro não é exibida.
 		// return "redirect:/formulario-adiciona-conta";
 	}
-
+	
 	@RequestMapping("/remove-conta")
 	public String removeConta(Conta conta) {
 		contaDao.remove(conta);
@@ -57,7 +57,7 @@ public class ContaController {
 		contaDao.paga(id);
 		response.setStatus(200);
 	}
-
+	
 	@RequestMapping("/mostra-conta")
 	public String mostra(Long id, Model model) {
 		model.addAttribute("conta", contaDao.buscaPorId(id));
@@ -65,7 +65,7 @@ public class ContaController {
 	}
 
 	@RequestMapping("/altera-conta")
-	public String altera(Conta conta) {
+	public String altera(Conta contList<Conta> lista();a) {
 		contaDao.altera(conta);
 		return "redirect:lista-contas";
 	}

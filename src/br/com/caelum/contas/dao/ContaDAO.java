@@ -1,58 +1,20 @@
 package br.com.caelum.contas.dao;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
 import br.com.caelum.contas.modelo.Conta;
-import br.com.caelum.contas.modelo.TipoDaConta;
 
-@Repository
-public class ContaDAO {
+public interface ContaDAO {
 
-	@PersistenceContext
-	private EntityManager manager;
+	Conta buscaPorId(Long id);
 
-	public void adiciona(Conta conta) {
-		manager.persist(conta);
+	List<Conta> lista();
 
-	}
+	void adiciona(Conta t);
 
-	public void remove(Conta conta) {
-		Conta contaRemover = buscaPorId(conta.getId());
-		manager.remove(contaRemover);
-	}
+	void altera(Conta t);
 
-	public void altera(Conta conta) {
-		manager.merge(conta);
-	}
+	void remove(Conta t);
 
-	@SuppressWarnings("unchecked")
-	public List<Conta> lista() {
-		return manager.createQuery("select c from Conta c").getResultList();
-	}
-
-	public Conta buscaPorId(Long id) {
-		return manager.find(Conta.class, id);
-	}
-
-	public void paga(Long id) {
-
-		Conta conta = buscaPorId(id);
-		conta.setPaga(true);
-		conta.setDataPagamento(Calendar.getInstance());
-		manager.merge(conta);
-	}
+	void paga(Long id);
 }
