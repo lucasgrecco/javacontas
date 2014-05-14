@@ -28,5 +28,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-webmvc-4.0.3.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-webmvc-portlet-4.0.3.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-websocket-4.0.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="src/META-INF/persistence.xml"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

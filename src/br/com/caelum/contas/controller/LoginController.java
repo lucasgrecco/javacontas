@@ -1,13 +1,12 @@
 package br.com.caelum.contas.controller;
 
 import javax.servlet.http.HttpSession;
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.com.caelum.contas.dao.UsuarioDAO;
+import br.com.caelum.contas.dao.UsuarioDao;
 import br.com.caelum.contas.modelo.Usuario;
 
 //@Transactional
@@ -15,12 +14,12 @@ import br.com.caelum.contas.modelo.Usuario;
 public class LoginController {
 
 	@Autowired
-	private UsuarioDAO usuarioDAO;
+	public UsuarioDao usuarioDAO;
 
-	// @Autowired
-	// public LoginController(UsuarioDAO usuarioDAO) {
-	// this.usuarioDAO = usuarioDAO;
-	// }
+//	 @Autowired
+//	 public LoginController(UsuarioDaoImpl usuarioDAO) {
+//		 this.usuarioDAO = usuarioDAO;
+//	 }
 
 	@RequestMapping("/login")
 	public String loginForm() {

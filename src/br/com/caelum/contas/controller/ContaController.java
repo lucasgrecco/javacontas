@@ -13,7 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.caelum.contas.dao.ContaDAO;
+import br.com.caelum.contas.dao.ContaDao;
 import br.com.caelum.contas.modelo.Conta;
 
 //@Transactional
@@ -21,10 +21,10 @@ import br.com.caelum.contas.modelo.Conta;
 public class ContaController {
 	
 	@Autowired
-	private ContaDAO contaDao;
+	public ContaDao contaDao;
 
 //	@Autowired //Spring vai fazer a inejção
-//	public ContaController(ContaDAO contaDao) {
+//	public ContaController(ContaDaoImpl contaDao) {
 //		this.contaDao = contaDao;
 //	}
 

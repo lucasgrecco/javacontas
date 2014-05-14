@@ -9,8 +9,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 @Entity
-//@Repository
-@Component
 public class Usuario {
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)

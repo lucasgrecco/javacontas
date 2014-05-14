@@ -4,7 +4,7 @@ import java.util.List;
 
 import br.com.caelum.contas.modelo.Conta;
 
-public interface ContaDAO {
+public interface ContaDao {
 
 	Conta buscaPorId(Long id);
 
