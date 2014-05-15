@@ -13,29 +13,35 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.caelum.contas.modelo.Usuario;
 
+@Transactional
 @Repository
 public class UsuarioDaoImpl {
 	
-	@Autowired
-	private EntityManagerFactory manager;
+//	@Autowired
+//	private EntityManagerFactory manager;
+//
+//	@PersistenceUnit
+////	@PersistenceContext(unitName="contas-unit")
+//	public void setEntityManagerFactory(EntityManagerFactory manager) {
+//		this.manager = manager;
+//	}
 
-	@PersistenceUnit
-//	@PersistenceContext(unitName="contas-unit")
-	public void setEntityManagerFactory(EntityManagerFactory manager) {
-		this.manager = manager;
-	}
-
-	protected EntityManager getEntityManager() {
-		return manager.createEntityManager();
-	}
+//	protected EntityManager getEntityManager() {
+//		return manager.createEntityManager();
+//	}
+	
+	@PersistenceContext
+	private EntityManager manager;
+	
 	
 	@SuppressWarnings("unused")
 	public boolean existeUsuario(Usuario usuario) {
 		boolean encontrado = false;
-		Usuario bUsuario = getEntityManager().find(Usuario.class, usuario.getId());
+		Usuario bUsuario = manager.find(Usuario.class, usuario.getId());
 		
 		if(usuario == null) {
 			throw new IllegalArgumentException("Usuário nao deve ser nulo");
@@ -53,7 +59,7 @@ public class UsuarioDaoImpl {
 			throw new IllegalArgumentException("Usuário nao deve ser nulo");
 		}
 		
-		getEntityManager().persist(usuario);
+		manager.persist(usuario);
 	}
 }
 

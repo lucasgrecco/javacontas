@@ -10,46 +10,46 @@ import javax.persistence.PersistenceUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.caelum.contas.modelo.Conta;
 
+@Transactional
 @Repository
 public class ContaDaoImpl implements ContaDao {
-	@Autowired
-	private EntityManagerFactory manager;
+//	@Autowired
+//	private EntityManagerFactory manager;
 
-	@PersistenceUnit
-//	@PersistenceContext(unitName="contas-unit")
-	public void setEntityManagerFactory(EntityManagerFactory manager) {
-		this.manager = manager;
-	}
-
-	protected EntityManager getEntityManager() {
-		return manager.createEntityManager();
-	}
+	@PersistenceContext
+	private EntityManager manager;
+	
+	
+//	protected EntityManager getEntityManager() {
+//		return manager.createEntityManager();
+//	}
 
 	public void adiciona(Conta conta) {
-		getEntityManager().persist(conta);
+		manager.persist(conta);
 
 	}
 
 	public void remove(Conta conta) {
 		Conta contaRemover = buscaPorId(conta.getId());
-		getEntityManager().remove(contaRemover);
+		manager.remove(contaRemover);
 	}
 
 	public void altera(Conta conta) {
-		getEntityManager().merge(conta);
+		manager.merge(conta);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Conta> lista() {
-		return getEntityManager().createQuery("select c from Conta c")
+		return manager.createQuery("select c from Conta c")
 				.getResultList();
 	}
 
 	public Conta buscaPorId(Long id) {
-		return getEntityManager().find(Conta.class, id);
+		return manager.find(Conta.class, id);
 	}
 
 	public void paga(Long id) {
@@ -57,7 +57,7 @@ public class ContaDaoImpl implements ContaDao {
 		Conta conta = buscaPorId(id);
 		conta.setPaga(true);
 		conta.setDataPagamento(Calendar.getInstance());
-		getEntityManager().merge(conta);
+		manager.merge(conta);
 	}
 
 }

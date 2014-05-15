@@ -65,7 +65,7 @@ public class ContaController {
 	}
 
 	@RequestMapping("/altera-conta")
-	public String altera(Conta contList<Conta> lista();a) {
+	public String altera(Conta conta) {
 		contaDao.altera(conta);
 		return "redirect:lista-contas";
 	}
